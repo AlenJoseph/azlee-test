@@ -1,0 +1,33 @@
+<h1>Update Wallet</h1>
+
+
+<mat-form-field floatLabel="never">
+    <input 
+        matInput 
+        placeholder="Amount" 
+        [value]="this.shopData.wallet" 
+        [(ngModel)]="amount"
+    >
+</mat-form-field>
+
+<mat-form-field floatLabel="never">
+    <input 
+        matInput 
+        placeholder="Notes" 
+        [value]="" 
+        [(ngModel)]="note"
+    >
+</mat-form-field>
+
+<div class="row">
+    <span class="col-sm-6">
+        <button 
+            mat-raised-button
+            class="small-button" 
+            color="accent"
+            (click)="updateWallet()">
+            Add
+        </button>
+    </span>
+</div>     
+  

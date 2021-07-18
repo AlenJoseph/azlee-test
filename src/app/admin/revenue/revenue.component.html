@@ -1,0 +1,317 @@
+<div class="mat-elevation-z4">
+    <h5 class="page-path">ADMIN / REVENUE</h5>
+      
+    <!-- <div class="cardSec">
+        <div class="cardMain">
+            <div class="card">
+                <canvas baseChart width="900" height="500"
+                    id="chart1"
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [colors]="barChartColors"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType">
+                </canvas>
+            </div>
+        </div>
+        <div class="cardMain">
+            <div class="card">
+                <canvas baseChart width="900" height="500"
+                    id="chart2"
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors"
+                    [legend]="lineChartLegend"
+                    [chartType]="lineChartType"
+                    [plugins]="lineChartPlugins">
+                </canvas>
+            </div>
+        </div>
+        <div class="cardMain">
+            <div class="card">
+                <canvas baseChart width="900" height="500"
+                    id="chart3"
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors"
+                    [legend]="lineChartLegend"
+                    [chartType]="lineChartType"
+                    [plugins]="lineChartPlugins">
+                </canvas>
+            </div>
+        </div>
+    </div> -->
+     <div class="toolbar">
+          &nbsp;
+    </div>
+</div>
+
+<br/>
+
+<div class="mat-elevation-z4">
+  <h5 class="page-path">Payment Info</h5>
+
+  <div class="toolbar">
+    <mat-form-field
+      class="test"
+      class="search-form-field"
+      appearance="legacy"
+      floatLabel="never"
+    >
+      <input
+        matInput
+        [(ngModel)]="searchKey"
+        placeholder="Search"
+        autocomplete="off"
+        (keyup)="applyFilter()"
+      />
+    </mat-form-field>
+  </div>
+
+  <mat-table [dataSource]="list" matSort matTableExporter #exporter1="matTableExporter" >
+    <!-- Provide list of columns to be listed -->
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+    <!-- Provide list of column headers and column data -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <ng-container matColumnDef="creationDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Creation Date</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">{{
+        element.created_date | date
+      }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="orderid">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Order ID</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">{{ element.payment_order_id }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="entity">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Entity</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.entity }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.amount }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amountPaid">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Amount Paid</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.amount_paid }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amountDue">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Amount Due</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.amount_due }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="currency">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Currency</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.currency }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="orderReceipt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Order Receipt</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.order_receipt }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.status }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="orderAt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Created At</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.order_created_at }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="updatedDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Updation Date</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">{{
+        element.updated_date | date
+      }}</mat-cell>
+    </ng-container>
+
+
+    <!-- Provide footer-row definition -->
+    <!-- <mat-footer-row
+      *matFooterRowDef="['loading']"
+      [ngClass]="{ hide: list != null }"
+    ></mat-footer-row>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef> Loading data... </mat-footer-cell>
+    </ng-container> -->
+  </mat-table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageSize]="5"
+    showFirstLastButtons
+  ></mat-paginator>
+    <button *ngIf="list != null" mat-raised-button (click)="exporter1.exportTable('xlsx', {fileName:'Payment Info', sheet: 'payment'})" style="margin:5px 10px">Export</button>
+
+</div>
+      
+
+<br/>
+
+<div class="mat-elevation-z4">
+  <h5 class="page-path">Wallet Info</h5>
+
+  <div class="toolbar">
+    <mat-form-field
+      class="test"
+      class="search-form-field"
+      appearance="legacy"
+      floatLabel="never"
+    >
+      <input
+        matInput
+        [(ngModel)]="searchKeyWallet"
+        placeholder="Search"
+        autocomplete="off"
+        (keyup)="applyFilterWallet()"
+      />
+    </mat-form-field>
+  </div>
+
+  <mat-table [dataSource]="listWallet" matSort  matTableExporter #exporter="matTableExporter">
+
+    
+    <ng-container matColumnDef="creationDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Creation Date</mat-header-cell
+      >
+    
+     <mat-cell *matCellDef="let element">
+         {{
+            element.created_date | date
+          }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="orderid">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Order ID</mat-header-cell>
+      <mat-cell *matCellDef="let element" style="word-break: break-all; padding: 10px;">
+          {{ element.order_id }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="originalAmout">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Original Amount</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">
+        {{ element.orginal_total }}
+      </mat-cell>
+      
+    </ng-container>
+
+    <ng-container matColumnDef="discount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Discount</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.discount }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="paidAmount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Paid Amount</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">
+        {{ element.total}}</mat-cell>
+    </ng-container>
+
+     <ng-container matColumnDef="shopFee">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Shop Fee</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.shop_fee }}
+      </mat-cell>
+    </ng-container>
+
+     <ng-container matColumnDef="azleeShopCommission">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Azlee Shop Commission</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.azlee_shop_commision }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="azleeDriverCommission">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Azlee Driver Commission</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.azlee_driver_commision }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="azleeTotalCommission">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Azlee Total Commission</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.azlee_commision }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Payment Type</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.payment_type }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="pickup">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Pickup</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <div *ngIf="element.is_pickup === true" style="text-transform: capitalize">Customer</div>
+                <div *ngIf="element.is_pickup === false" style="text-transform: capitalize">Driver </div>
+      </mat-cell>
+    </ng-container>
+<mat-row *matRowDef="let row; columns: displayedColumnsWallet"></mat-row>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsWallet"></mat-header-row>
+
+<!-- 
+    <mat-footer-row
+      *matFooterRowDef="['loading']"
+      [ngClass]="{ hide: list != null }"
+    ></mat-footer-row>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef> Loading data... </mat-footer-cell>
+    </ng-container> -->
+  </mat-table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageSize]="5"
+    showFirstLastButtons
+  ></mat-paginator>
+
+    <button *ngIf="listWallet != null" mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'Wallet Info', sheet: 'wallet'})" style="margin:5px 10px">Export</button>
+
+</div>

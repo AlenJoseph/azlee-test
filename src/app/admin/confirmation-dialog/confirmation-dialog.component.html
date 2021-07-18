@@ -1,0 +1,5 @@
+<h3 mat-dialog-title>{{data.confirmationMessage}}</h3>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">No thanks!</button>
+  <button mat-flat-button color="accent" [mat-dialog-close]="data" cdkFocusInitial>Yes</button>
+</div>

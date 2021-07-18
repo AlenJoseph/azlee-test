@@ -1,0 +1,46 @@
+<div class="mat-elevation-z4">
+  <h5 class="page-path">USER DETAILS</h5>
+
+  <mat-table [dataSource]="list" matSort>
+    <!-- Provide list of columns to be listed -->
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+    <!-- Provide list of column headers and column data -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <ng-container matColumnDef="cover">
+      <mat-header-cell *matHeaderCellDef>Image</mat-header-cell>
+      <mat-cell *matCellDef="let element; index as i">
+        <div class="initial">
+            {{ element.name[0] }}{{ element.name[1] }}
+      </div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.name }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.phone_number }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let element" style="word-break: break-word;padding: 0px 5px;">{{ element.email }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="orderNo">
+      <mat-header-cell *matHeaderCellDef>No. of orders</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.order_no }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element" >
+          <div *ngIf="element.is_blocked === false" class="green"><div class="greenRound"></div> Active</div>
+          <div *ngIf="element.is_blocked === true" class="red"><div class="redRound"></div> In Active</div>
+      </mat-cell>    
+    </ng-container>
+  </mat-table>
+
+</div>

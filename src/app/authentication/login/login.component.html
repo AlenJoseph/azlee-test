@@ -1,0 +1,59 @@
+<div class="login-component">
+  <mat-card class="card mat-elevation-z0">
+    <mat-card-header> </mat-card-header>
+    <mat-card-title class="card-title">Login</mat-card-title>
+    <mat-card-content>
+      <form class="login-form" [formGroup]="loginForm" (submit)="onLogin()">
+        <mat-form-field class="email-form-field col-sm-12" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+            class="email-input" 
+            (focus)="clearLoginError()"
+          />
+          <mat-error
+            *ngIf="
+              loginForm.get('email').hasError('email') &&
+              !loginForm.get('email').hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('email').hasError('required')">
+            Email is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="password-form-field col-sm-12"
+          appearance="outline"
+        >
+          <mat-label>Password</mat-label>
+          <input
+            type="password"
+            matInput
+            formControlName="password"
+            class="password-input"
+            (focus)="clearLoginError()"
+          />
+          <mat-error *ngIf="loginForm.get('password')">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+        <button
+          type="submit"
+          mat-raised-button
+          class="login-button col-sm-12"
+          color="primary"
+        >
+          Login
+        </button>
+      </form>
+    </mat-card-content>
+    <div class="router-container">
+      <div class="login-error" *ngIf="loginError">{{ loginError }}</div>
+      <a class="router-link" routerLink="/signup">Don't have an account?</a>
+    </div>
+  </mat-card>
+</div>

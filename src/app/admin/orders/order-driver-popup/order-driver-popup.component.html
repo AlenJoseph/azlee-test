@@ -1,0 +1,77 @@
+<div class="mat-elevation-z4">
+    <h5 class="page-path">DRIVER DETAILS</h5>
+  
+    <mat-table [dataSource]="list" matSort>
+      <!-- Provide list of columns to be listed -->
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  
+      <!-- Provide list of column headers and column data -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <ng-container matColumnDef="cover">
+        <mat-header-cell *matHeaderCellDef>Image</mat-header-cell>
+        <mat-cell *matCellDef="let element; index as i">
+          <div class="initial">
+                {{ element.name[0] }}{{ element.name[1] }}
+          </div>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.name }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.phone_number }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="orderNo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>No. of Orders</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.order_no }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="workStatus">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Working Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div *ngIf="element.is_working === true" class="green">Working</div>
+          <div *ngIf="element.is_working === false" class="red">Not Working</div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="deliveryStatus">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Delivery Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div *ngIf="element.on_delivery === true" class="green">On Delivery</div>
+          <div *ngIf="element.on_delivery === false" class="red">Idle</div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="wallet">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Wallet Balance</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.wallet }}
+        </mat-cell>
+      </ng-container>
+
+       <ng-container matColumnDef="blockedStatus">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Blocked Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+           <div *ngIf="element.is_blocked === true" class="red">Blocked</div>
+          <div *ngIf="element.is_blocked === false" class="green">Active</div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef >Status</mat-header-cell
+        >
+        <mat-cell *matCellDef="let element" >
+            <div *ngIf="element.is_active === true" class="green"><div class="greenRound"></div> Active</div>
+            <div *ngIf="element.is_active === false" class="red"><div class="redRound"></div> In Active</div>
+        </mat-cell>
+      </ng-container>
+    </mat-table>
+  </div>
+  

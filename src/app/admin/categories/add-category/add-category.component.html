@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>New Category</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="newCategoryForm">
+    <mat-form-field class="col-sm-12">
+      <mat-label>Category Name</mat-label>
+      <input type="email" matInput formControlName="categoryName" />
+      <mat-error *ngIf="newCategoryForm.controls.categoryName.invalid">
+        Category name is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-sm-12">
+      <mat-label>Description</mat-label>
+      <textarea type="text" matInput formControlName="description" rows="4">
+      </textarea>
+      <mat-error *ngIf="newCategoryForm.controls.description.invalid">
+        Description is required
+      </mat-error>
+    </mat-form-field>
+
+    <div class="image-upload">
+      <button
+        mat-stroked-button
+        class="image-upload-button"
+        (click)="onOpenFiles()"
+      >
+        <mat-icon>file_upload</mat-icon>
+        <span *ngIf="!imageFilename">Select image</span>
+        <span *ngIf="imageFilename">Change image</span>
+      </button>
+      {{ imageFilename }}
+      <input
+        type="file"
+        accept="image/*"
+        #fileInput
+        id="fileUpload"
+        name="fileUpload"
+        style="display: none"
+        formControlName="image"
+        (change)="fileChangeEvent($event)"
+      />
+      <mat-error
+        class="file-upload-error"
+        *ngIf="
+          newCategoryForm.controls.image.invalid &&
+          newCategoryForm.controls.image.touched
+        "
+      >
+        Cover image is required
+      </mat-error>
+      <mat-error class="file-upload-error" *ngIf="imageError">
+        {{ imageError }}
+      </mat-error>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<div mat-dialog-actions align="end">
+  <button mat-stroked-button (click)="onNoClick()">Cancel</button>
+  <button
+    mat-flat-button
+    [disabled]="newCategoryForm.invalid || isSubmitting"
+    [ngClass]="{ 'spinner-padding': isSubmitting }"
+    (click)="onSubmit()"
+    color="accent"
+    cdkFocusInitial
+  >
+    <span *ngIf="!isSubmitting">Create</span>
+    <mat-spinner [diameter]="20" *ngIf="isSubmitting"></mat-spinner>
+  </button>
+</div>

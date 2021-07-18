@@ -1,0 +1,73 @@
+<div class="login-component">
+  <mat-card class="card mat-elevation-z0">
+    <mat-card-header> </mat-card-header>
+    <mat-card-title class="card-title">Sign up</mat-card-title>
+    <mat-card-content>
+      <form class="login-form">
+        <mat-form-field appearance="outline" class="email-form-field col-sm-12">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            [formControl]="emailFormControl"
+            class="email-input"
+          />
+          <mat-error
+            *ngIf="
+              emailFormControl.hasError('email') &&
+              !emailFormControl.hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="password-form-field col-sm-12"
+          appearance="outline"
+        >
+          <mat-label>Password</mat-label>
+          <input
+            type="password"
+            matInput
+            [formControl]="passwordFormControl"
+            class="password-input"
+          />
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="password-form-field col-sm-12"
+          appearance="outline"
+        >
+          <mat-label>Confirm Password</mat-label>
+          <input
+            type="password"
+            matInput
+            [formControl]="passwordFormControl"
+            class="confirm-password-input"
+          />
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Please confirm your password.
+          </mat-error>
+        </mat-form-field>
+        <button
+          type="submit"
+          mat-raised-button
+          class="signup-button col-sm-12"
+          color="primary"
+          (click)="onSignUp()"
+        >
+          Sign up
+        </button>
+      </form>
+    </mat-card-content>
+    <div class="router-container">
+      <div class="signup-error" *ngIf="signUpError">{{ signUpError }}</div>
+      <a class="router-link" routerLink="/login">Already have an account?</a>
+    </div>
+  </mat-card>
+</div>

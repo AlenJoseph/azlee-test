@@ -1,0 +1,105 @@
+<div class="mat-elevation-z4">
+        <h5 class="page-path">ADMIN / OFFERS</h5>
+      
+        <div class="toolbar">
+          <button
+            mat-flat-button
+            class="add-offer"
+            (click)="openAddOfferDialog()"
+            color="accent"
+          >
+            New Offer
+          </button>
+      
+          <mat-form-field
+            class="test"
+            class="search-form-field"
+            appearance="legacy"
+            floatLabel="never"
+          >
+            <input
+              matInput
+              [(ngModel)]="searchKey"
+              placeholder="Search"
+              autocomplete="off"
+              (keyup)="applyFilter()"
+            />
+          </mat-form-field>
+        </div>
+      
+        <mat-table [dataSource]="list" matSort matTableExporter #exporter="matTableExporter" hiddenColumns=[0,6]>
+          <!-- Provide list of columns to be listed -->
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      
+          <!-- Provide list of column headers and column data -->
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <ng-container matColumnDef="cover">
+            <mat-header-cell *matHeaderCellDef>Image</mat-header-cell>
+            <mat-cell *matCellDef="let element; index as i">
+              <a [href]="element.image" data-lightbox="category-cover"
+                ><img class="avatar" [src]="element.image" alt="image-1"
+              /></a>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="description">
+              <mat-header-cell *matHeaderCellDef mat-sort-header
+                >Description</mat-header-cell
+              >
+              <mat-cell *matCellDef="let element">{{ element.description }}</mat-cell>
+            </ng-container>
+          <ng-container matColumnDef="code">
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Code</mat-header-cell
+            >
+            <mat-cell *matCellDef="let element">{{ element.offer_code }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{ element.offer_amount }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="percentage">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Percentage</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{ element.percentage }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="creationDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Creation date</mat-header-cell
+            >
+            <mat-cell *matCellDef="let element">{{
+              element.created_date | date
+            }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Delete</mat-header-cell
+            >
+            <mat-cell *matCellDef="let element">
+              <button mat-icon-button color="warn" (click)="deleteOffer(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+      
+          <!-- Provide footer-row definition -->
+          <!-- <mat-footer-row
+            *matFooterRowDef="['loading']"
+            [ngClass]="{ hide: list != null }"
+          ></mat-footer-row>
+          <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef> Loading data... </mat-footer-cell>
+          </ng-container> -->
+        </mat-table>
+      
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          [pageSize]="5"
+          showFirstLastButtons
+        ></mat-paginator>
+          <button *ngIf="list!= null" mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'Offers', sheet: 'offers'})" style="margin:5px 10px">Export</button>
+
+      </div>
+      

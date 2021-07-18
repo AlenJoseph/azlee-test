@@ -1,0 +1,75 @@
+<div class="main-container" [class.is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="toolbar mat-elevation-z4">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="app-name">A-ZLEE Admin</h1>
+    <span class="spacer"></span>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon> Logout</button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <mat-sidenav-container
+    autosize
+    class="sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+      class="mat-elevation-z4"
+      [opened]="mobileQuery.matches ? false : true"
+    >
+      <mat-nav-list class="nav-list">
+        
+        <a mat-list-item routerLink="/revenue" class="nav-item"
+          ><mat-icon>money</mat-icon>
+          <span class="nav-spacer"></span> Revenue</a
+        >
+        <a mat-list-item routerLink="/categories" class="nav-item">
+          <mat-icon>category</mat-icon> <span class="nav-spacer"></span>
+          Categories
+        </a>
+        <a mat-list-item routerLink="/shops" class="nav-item">
+          <mat-icon>storefront</mat-icon> <span class="nav-spacer"></span>
+          Shops
+        </a>
+        <a mat-list-item routerLink="/users" class="nav-item">
+          <mat-icon>people_alt</mat-icon>
+          <span class="nav-spacer"></span> Users</a
+        >
+        <a mat-list-item routerLink="/drivers" class="nav-item"
+          ><mat-icon>moped</mat-icon>
+          <span class="nav-spacer"></span> Drivers</a
+        >
+        <a mat-list-item routerLink="/offers" class="nav-item"
+          ><mat-icon>local_offer</mat-icon>
+          <span class="nav-spacer"></span> Offers</a
+        >
+        <a mat-list-item routerLink="/orders" class="nav-item"
+          ><mat-icon>local_mall</mat-icon>
+          <span class="nav-spacer"></span> Orders</a
+        >
+        <a mat-list-item routerLink="/fazza" class="nav-item"
+          ><mat-icon>local_mall</mat-icon>
+          <span class="nav-spacer"></span> Fazza</a
+        >
+        
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <router-outlet></router-outlet>
+      <!-- <app-data-list></app-data-list> -->
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

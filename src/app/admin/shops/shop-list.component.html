@@ -1,0 +1,170 @@
+<div class="mat-elevation-z4">
+  <h5 class="page-path">ADMIN / SHOPS</h5>
+
+  <div class="toolbar">
+    <div></div>
+    <mat-form-field
+      class="test"
+      class="search-form-field"
+      appearance="legacy"
+      floatLabel="never"
+    >
+      <input
+        matInput
+        [(ngModel)]="searchKey"
+        placeholder="Search"
+        autocomplete="off"
+        (keyup)="applyFilter()"
+      />
+    </mat-form-field>
+  </div>
+
+  <mat-table [dataSource]="list" matSort matTableExporter #exporter="matTableExporter" hiddenColumns=[0]>
+    <!-- Provide list of columns to be listed -->
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+    <!-- Provide list of column headers and column data -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <ng-container matColumnDef="cover">
+      <mat-header-cell *matHeaderCellDef>Image</mat-header-cell>
+      <mat-cell *matCellDef="let element; index as i">
+        <span *ngIf="element.image">
+          <a [href]="element.image" data-lightbox="category-cover"
+            ><img class="avatar" [src]="element.image" alt="image-1"
+          /></a>
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.name }}
+      </mat-cell>
+    </ng-container>
+    <!-- <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.phone_number }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
+      <mat-cell *matCellDef="let element" style=" word-break: break-word;padding: 0 2px">{{ element.address }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let element" style=" word-break: break-word;padding: 0 2px">{{ element.email }}</mat-cell>
+    </ng-container> -->
+    <ng-container matColumnDef="rating">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Rating</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">{{ element.rating }}</mat-cell>
+    </ng-container>
+    <!-- <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef>Shop Category</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.shop_category }}</mat-cell>
+    </ng-container> -->
+    <ng-container matColumnDef="wallet">
+      <mat-header-cell *matHeaderCellDef>Wallet</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.wallet }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="verify">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Verified</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element" >
+        <div *ngIf="element.is_active === true" class="green"><div class="greenRound"></div> Verified</div>
+        <div *ngIf="element.is_active === false" class="red"><div class="redRound"></div> Pending</div>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="promote">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Promoted</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element" >
+        <div *ngIf="element.is_promted === true" class="green"><div class="greenRound"></div> Promoted</div>
+        <div *ngIf="element.is_promted === false" class="red"><div class="redRound"></div> Not Promoted</div>
+      </mat-cell>
+
+    </ng-container>
+    
+
+    <!-- <ng-container matColumnDef="identificationDocs">
+      <mat-header-cell *matHeaderCellDef>Identification Docs</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+
+        {{ element.identification_documents }}
+      </mat-cell>
+    </ng-container> -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+         
+          
+          <span *ngIf="!element.is_blocked"  >
+            <button mat-raised-button class="small-button" color="accent" (click)="verifyShop(element)">
+              Verify
+            </button>
+          </span>
+  
+                
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="promoteBtn">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+
+       <span *ngIf="!element.is_promoted"  >
+            <button mat-raised-button class="small-button" color="accent" (click)="promoteShop(element)">
+              Promote
+            </button>
+          </span>
+       
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="account">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+
+        <button mat-raised-button class="small-button" color="accent" (click)="showAccount(element)">
+          Account Details
+        </button>
+       
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="updateWallet">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="row">
+            <span class="col-sm-6">
+              <button mat-raised-button class="small-button" color="accent" (click)="updateWallet(element)">
+                Update Wallet
+              </button>
+            </span>
+          </div>        
+        </mat-cell>
+      </ng-container>
+
+    <!-- Provide footer-row definition -->
+    <!-- <mat-footer-row
+      *matFooterRowDef="['loading']"
+      [ngClass]="{ hide: list != null }"
+    ></mat-footer-row>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef> Loading data... </mat-footer-cell>
+    </ng-container> -->
+  </mat-table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageSize]="5"
+    showFirstLastButtons
+  ></mat-paginator>
+
+    <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'Shops List', sheet: 'shops'})" style="margin:5px 10px">Export</button>
+
+</div>

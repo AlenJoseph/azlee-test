@@ -1,0 +1,206 @@
+<div class="mat-elevation-z4">
+        <h5 class="page-path">ADMIN / ORDERS</h5>
+      
+        <div class="toolbar">
+          <mat-form-field
+            class="test"
+            class="search-form-field"
+            appearance="legacy"
+            floatLabel="never"
+          >
+            <input
+              matInput
+              [(ngModel)]="searchKey"
+              placeholder="Search"
+              autocomplete="off"
+              (keyup)="applyFilter()"
+            />
+          </mat-form-field>
+
+          <mat-form-field 
+            class="test"
+            class="search-form-field"
+            appearance="fill"
+          >
+            <mat-label>Status</mat-label>
+            <select matNativeControl required (change)="onFilterChange($event.target.value)">
+              <option matNativeControl value="all">All</option>
+              <option matNativeControl value="delivered">Delivered</option>
+              <option matNativeControl value="accepted">Accepted</option>
+              <option matNativeControl value="pending">Pending</option>
+              <option matNativeControl value="cancelled">Cancelled</option>
+              <option matNativeControl value="rejected">Rejected</option>
+              <option matNativeControl value="driver-picked-up">Driver Picked Up</option>
+
+            </select>
+          </mat-form-field>
+        </div>
+      
+        <mat-table [dataSource]="list" matSort matTableExporter #exporter="matTableExporter" hiddenColumns=[9,11,10]>
+          <!-- Provide list of columns to be listed -->
+          <mat-row *matRowDef="let row; columns: displayedColumns" style="cursor: pointer"></mat-row>
+      
+          <!-- Provide list of column headers and column data -->
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Creation date</mat-header-cell
+            >
+            <mat-cell *matCellDef="let element">{{
+              element.created_date | date : 'medium'
+            }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="orderId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header style="padding: 0px 12px 0px 20px;"
+              >order Id</mat-header-cell
+            >
+            <mat-cell *matCellDef="let element"  style="padding: 6px 12px 0px 20px;">{{ element.order_id }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="customerId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header style="padding:0px 12px 0px 0px;"
+              >Customer</mat-header-cell
+            >
+            <mat-cell *matCellDef="let element" (click)="openCustomerDetailDialog(element)" style="padding:6px 12px 0px 0px;word-break: break-word;">{{ element.customer_name }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="shopId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header  style="padding:0px 12px 0px 6px;"
+              >Shop</mat-header-cell
+            >
+            <mat-cell *matCellDef="let element" (click)="openShopDetailDialog(element)" style="padding:6px 12px 0px 6px;word-break: break-word;">{{ element.shop_name }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="paymentType">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Payment Type</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{ element.payment_type }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="orderStatus">
+             <mat-header-cell *matHeaderCellDef mat-sort-header>Order Status</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <div *ngIf="element.order_status === 'delivered'" class="green"> Delivered</div>
+                <div *ngIf="element.order_status === 'accepted'" class="blue"> Accepted</div>
+                <div *ngIf="element.order_status === 'pending'" class="violet"> Pending</div>
+                <div *ngIf="element.order_status === 'cancelled'" class="red"> Cancelled</div>
+                <div *ngIf="element.order_status === 'rejected'" class="orange"> Rejected</div>
+                <div *ngIf="element.order_status === 'driver-picked-up'" class="gray"> Driver Picked Up</div>
+            </mat-cell>
+          </ng-container>
+           <ng-container matColumnDef="address">
+             <mat-header-cell *matHeaderCellDef mat-sort-header style="padding:0px 12px 0px 6px;">Address</mat-header-cell>
+            <mat-cell *matCellDef="let element" style="padding:6px 12px 0px 6px;word-break: break-word;">
+                {{ element.customer_address }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="driver">
+             <mat-header-cell *matHeaderCellDef mat-sort-header style="padding:0px 12px 0px 6px">Driver</mat-header-cell>
+                <mat-cell *matCellDef="let element" (click)="openDriverDetailDialog(element)" style="padding:6px 12px 0px 6px;word-break: break-word;">
+                  {{ element.delivery_partner_name }}
+                </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="deliveryStatus">
+             <mat-header-cell *matHeaderCellDef mat-sort-header>Delivery Status</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <div *ngIf="element.delivery_partner_id.length !== 0" style="text-transform: capitalize"> {{ element.delivery_status }}</div>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="pickupStatus">
+             <mat-header-cell *matHeaderCellDef mat-sort-header style="padding:0px 12px 0px 6px;">Pickup Status</mat-header-cell>
+            <mat-cell *matCellDef="let element" style="padding:6px 12px 0px 6px;word-break: break-word;">
+                <div *ngIf="element.is_pickup === true" style="text-transform: capitalize">Customer</div>
+                <div *ngIf="element.is_pickup === false" style="text-transform: capitalize">Driver </div>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="distance">
+             <mat-header-cell *matHeaderCellDef mat-sort-header style="padding:0px 12px 0px 6px;">Distance</mat-header-cell>
+            <mat-cell *matCellDef="let element" style="padding:6px 12px 0px 6px;word-break: break-word;">
+                {{ element.km }} km
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="total">
+             <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.total | currency: 'INR' }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="viewDetails" hiddenColumns>
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div class="row">
+                <span class="col-sm-12">
+                  <div 
+                    class="viewBtn"
+                    (click)="openOrderDetailDialog(element)">
+                    View Order
+                  </div>
+                </span>
+              </div>        
+            </mat-cell>
+          </ng-container>  
+          <!-- <ng-container matColumnDef="cancel">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div class="row">
+                <span class="col-sm-12">
+                  <button 
+                    *ngIf= "element.order_status !== 'delivered' && element.order_status !== 'rejected'  && element.order_status !== 'cancelled'" 
+                    mat-raised-button class="small-button" 
+                    style="background-color: #fa5151;color:white" 
+                    (click)="cancelOrder(element)">
+                    Cancel
+                  </button>
+                </span>
+              </div>        
+            </mat-cell>
+          </ng-container>   -->
+
+          <ng-container matColumnDef="cancel">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div class="row">
+                <span class="col-sm-12" *ngIf= "element.order_status !== 'rejected' && element.order_status !== 'cancelled' && element.order_status !== 'delivered'">
+                  <select matNativeControl (change)="changeStatus($event.target.value, element._id, element.shop_id)" >
+                    <option matNativeControl value="select">Change Status</option>
+                    <option matNativeControl value="accepted" *ngIf= "element.order_status !== 'accepted'"> 
+                        Accepted
+                    </option>
+                    <option matNativeControl value="delivered" *ngIf= "element.order_status !== 'delivered'"> 
+                        Delivered
+                    </option>
+                    <option matNativeControl value="rejected" *ngIf= "element.order_status !== 'rejected'"> 
+                        Rejected
+                    </option>
+                    <option matNativeControl value="cancelled" *ngIf= "element.order_status !== 'cancelled'"> 
+                        Cancelled
+                    </option>
+                  </select>
+                </span>
+              </div>       
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="changeDriver">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div class="row" *ngIf= "element.order_status === 'accepted'">
+                <span class="col-sm-12" *ngIf= "element.delivery_status === 'pending' || element.delivery_status === 'accepted'">
+                  <select matNativeControl (change)="changeDriver($event.target.value, element._id)" *ngIf= "element.is_pickup === false" >
+                    <option matNativeControl value="select">Change Driver</option>
+                    <option *ngFor="let driver of driverList" matNativeControl value={{driver._id}} > 
+                        {{ driver.name }}
+                    </option>
+                  </select>
+                </span>
+              </div>        
+            </mat-cell>
+          </ng-container> 
+        </mat-table>
+      
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          [pageSize]="10"
+          showFirstLastButtons
+        ></mat-paginator>
+          <button *ngIf="list!= null" mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'Orders', sheet: 'orders'})" style="margin:5px 10px">Export</button>
+
+      </div>
+      

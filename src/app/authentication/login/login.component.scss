@@ -1,0 +1,42 @@
+.login-component {
+  max-width: 360px;
+}
+.card {
+  padding: 20px 20px 70px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.card-title {
+  text-align: center;
+  padding: 10px 0px;
+  font-size: 18px;
+}
+.email-form-field .password-form-field {
+  width: 100%;
+  font-size: 16px;
+  margin: 0px;
+}
+
+.login-button {
+  width: 100%;
+  height: 45px;
+}
+
+.login-error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.col-sm-12 {
+  padding: 0px;
+}
+
+.router-link {
+  color: blue;
+  text-decoration: none;
+}
+
+.router-container {
+  width: 100%;
+  text-align: center;
+}

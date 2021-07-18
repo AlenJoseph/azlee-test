@@ -1,0 +1,58 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.mat-toolbar {
+  position: relative;
+  z-index: 2;
+}
+
+.toolbar {
+  //max-height: 50px;
+}
+
+.is-mobile .toolbar {
+  position: fixed;
+  z-index: 2;
+}
+
+.spacer {
+  flex: 1 1;
+}
+
+h1.app-name {
+  margin-left: 8px;
+  margin-top: 3px;
+  font-size: 16px;
+}
+
+.sidenav-container {
+  flex: 1;
+}
+
+.is-mobile .sidenav-container {
+  flex: 1 0 auto;
+}
+
+.sidenav-content {
+  padding: 10px;
+}
+
+.nav-list {
+  min-width: 150px;
+  font-size: 10px !important;
+}
+
+.nav-item {
+  font-size: 15px !important;
+}
+
+.nav-spacer {
+  padding-left: 15px;
+}
