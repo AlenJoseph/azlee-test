@@ -65,7 +65,7 @@
     </ng-container> -->
     <ng-container matColumnDef="wallet">
       <mat-header-cell *matHeaderCellDef>Wallet</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.wallet }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ element.wallet | currency: 'INR':true:'1.2-2'}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="verify">
       <mat-header-cell *matHeaderCellDef mat-sort-header

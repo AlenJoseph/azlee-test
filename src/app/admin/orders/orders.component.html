@@ -119,7 +119,14 @@
           <ng-container matColumnDef="total">
              <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.total | currency: 'INR' }}
+              {{element.total | currency: 'INR' }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="customerPaid">
+             <mat-header-cell *matHeaderCellDef mat-sort-header>Customer Paid Amount</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+               <label *ngIf= "element.azlee_offer_amount == 0"> {{element.total | currency: 'INR' }} </label>
+               <label *ngIf= "element.azlee_offer_amount > 0"> {{element.azlee_offer_amount | currency: 'INR' }} </label>
             </mat-cell>
           </ng-container>
           <ng-container matColumnDef="viewDetails" hiddenColumns>

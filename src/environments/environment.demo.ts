@@ -3,10 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  baseURL:
-    'https://a-zlee-core.herokuapp.com/dev/',
-};
+         production: false,
+         baseURL: 'https://a-zlee-core.herokuapp.com/dev/'
+       };
 
 /*
  * For easier debugging in development mode, you can import the following file

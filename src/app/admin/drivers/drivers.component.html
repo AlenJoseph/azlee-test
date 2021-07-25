@@ -75,7 +75,7 @@
       <ng-container matColumnDef="wallet">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Wallet Balance</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          {{ element.wallet }}
+          {{ element.wallet | currency: 'INR':true:'1.2-2'}}
         </mat-cell>
       </ng-container>
 

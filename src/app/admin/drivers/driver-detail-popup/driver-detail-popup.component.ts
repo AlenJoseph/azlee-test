@@ -44,14 +44,12 @@ export class DriverDetailPopupComponent implements OnInit {
   displayedColumns: string[] = [
     'creationDate',
     'orderid',
-    'originalAmout',
-    'discount',
+    'totalAmount',
     'paidAmount',
+    'deliveryCharge',
     'driverFee',
-    'azleeShopCommission',
-    'azleeDriverCommission',
     'type',
-    'pickup',
+    'kilometer',
     'totalCommission'
   ];
 
@@ -77,8 +75,15 @@ export class DriverDetailPopupComponent implements OnInit {
           payment_type: data[i].payment_type,
           shop_fee: data[i].shop_fee,
           total: data[i].total,
+          azlee_offer_amount: data[i].azlee_offer_amount,
+          km: data[i].km,
           _id: data[i]._id,
-          azlee_total_commission: (data[i].orginal_total - data[i].delivery_fee).toFixed(2)
+          customer_delivery_charge: data[i].customer_delivery_charge,
+          azlee_total_commission: (
+            data[i].customer_delivery_charge -
+            data[i].delivery_fee +
+            data[i].azlee_driver_commision
+          ).toFixed(2)
         });
       }
 

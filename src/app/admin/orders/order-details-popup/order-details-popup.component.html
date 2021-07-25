@@ -25,6 +25,9 @@
               (keyup)="applyFilter()"
             />
           </mat-form-field>
+          <div>
+            Total: {{ totalAmount | currency: 'INR'   }}
+          </div>
         </div>
       
         <mat-table [dataSource]="list" matSort matTableExporter #exporter="matTableExporter">
@@ -49,6 +52,12 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
             <mat-cell *matCellDef="let element">
                 {{ element.price | currency: 'INR' }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="total">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{ element.total | currency: 'INR'  }}
             </mat-cell>
           </ng-container>
                 

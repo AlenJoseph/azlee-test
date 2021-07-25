@@ -40,19 +40,34 @@ export class OrderDetailsPopupComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['product', 'quantity', 'price'];
+  displayedColumns: string[] = ['product', 'quantity', 'price', 'total'];
   searchKey: string;
-  offerData: any;
-
+  offerData: any = [];
+  totalAmount = 0;
   list: MatTableDataSource<any>;
 
   ngOnInit(): void {
     this.getCategories();
   }
 
-
   getCategories() {
-    this.offerData = this.data.dataKey;
+    console.log(this.data.dataKey);
+    let dataLength = this.data.dataKey;
+    console.log(dataLength.length);
+    for (let i = 0; i < dataLength.length; i++) {
+      this.offerData.push({
+        product_name: dataLength[i].product_name,
+        quantity: dataLength[i].quantity,
+        price: dataLength[i].price,
+        total: parseInt(dataLength[i].price) * parseInt(dataLength[i].quantity)
+      });
+      this.totalAmount =
+        this.totalAmount +
+        parseInt(dataLength[i].price) * parseInt(dataLength[i].quantity);
+    }
+    console.log(this.offerData);
+    console.log(this.totalAmount);
+    // this.offerData = this.data.dataKey;
     this.list = new MatTableDataSource(this.offerData);
     this.list.sort = this.sort;
     this.list.paginator = this.paginator;

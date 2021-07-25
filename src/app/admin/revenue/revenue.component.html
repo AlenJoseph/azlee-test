@@ -241,12 +241,22 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="totalAmount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Total</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">
+        {{ element.total}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="paidAmount">
       <mat-header-cell *matHeaderCellDef mat-sort-header
         >Paid Amount</mat-header-cell
       >
       <mat-cell *matCellDef="let element">
-        {{ element.total}}</mat-cell>
+        <label *ngIf= "element.azlee_offer_amount == 0"> {{element.total | currency: 'INR' }} </label>
+        <label *ngIf= "element.azlee_offer_amount > 0"> {{element.azlee_offer_amount | currency: 'INR' }} </label>
+      </mat-cell>
     </ng-container>
 
      <ng-container matColumnDef="shopFee">
@@ -266,7 +276,9 @@
     <ng-container matColumnDef="azleeDriverCommission">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Azlee Driver Commission</mat-header-cell>
       <mat-cell *matCellDef="let element">
-          {{ element.azlee_driver_commision }}
+          {{element.customer_delivery_charge -
+            element.delivery_fee +
+            element.azlee_driver_commision}}
       </mat-cell>
     </ng-container>
 
@@ -274,6 +286,13 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header>Azlee Total Commission</mat-header-cell>
       <mat-cell *matCellDef="let element">
           {{ element.azlee_commision }}
+      </mat-cell>
+    </ng-container>
+
+     <ng-container matColumnDef="km">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>KM</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.km }}
       </mat-cell>
     </ng-container>
 

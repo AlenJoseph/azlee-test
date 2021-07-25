@@ -193,11 +193,13 @@ export class RevenueComponent implements OnInit {
     'orderid',
     'originalAmout',
     'discount',
+    'totalAmount',
     'paidAmount',
     'shopFee',
     'azleeShopCommission',
     'azleeDriverCommission',
     'azleeTotalCommission',
+    'km',
     'type',
     'pickup'
   ];

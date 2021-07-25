@@ -58,6 +58,7 @@ export class OrdersComponent implements OnInit {
     'pickupStatus',
     'distance',
     'total',
+    'customerPaid',
     'viewDetails',
     'cancel',
     'changeDriver'
@@ -84,114 +85,114 @@ export class OrdersComponent implements OnInit {
           return !offer.is_blocked;
         });
         for (let i = 0; i < data.length; i++) {
-          if (
-            data[i].delivery_partner_id !== undefined &&
-            data[i].delivery_partner_id !== null
-          ) {
-            if (data[i].shop_id !== null) {
-              this.offerData.push({
-                created_date: data[i].created_date,
-                customer_id: data[i].customer_id['_id'],
-                customer_name: data[i].customer_id['name'],
-                customer_address: data[i].customer_id['address'],
+            if (
+              data[i].delivery_partner_id !== undefined &&
+              data[i].delivery_partner_id !== null
+            ) {
+              if (data[i].shop_id !== null) {
+                this.offerData.push({
+                  created_date: data[i].created_date,
+                  customer_id: data[i].customer_id['_id'],
+                  customer_name: data[i].customer_id['name'],
+                  customer_address: data[i].customer_id['address'],
+                  azlee_offer_amount: data[i].azlee_offer_amount,
+                  delivery_partner_id: data[i].delivery_partner_id['_id'],
+                  delivery_partner_name: data[i].delivery_partner_id['name'],
 
-                delivery_partner_id: data[i].delivery_partner_id['_id'],
-                delivery_partner_name: data[i].delivery_partner_id['name'],
+                  is_pickup: data[i].is_pickup,
+                  order_id: data[i].order_id,
+                  order_status: data[i].order_status,
+                  delivery_status: data[i].delivery_status,
 
-                is_pickup: data[i].is_pickup,
-                order_id: data[i].order_id,
-                order_status: data[i].order_status,
-                delivery_status: data[i].delivery_status,
+                  orders: data[i].orders,
+                  payment_status: data[i].payment_status,
+                  payment_type: data[i].payment_type,
+                  shop_id: data[i].shop_id['_id'],
+                  shop_name: data[i].shop_id['name'],
+                  km: data[i].km,
+                  total: data[i].total,
+                  verification_code: data[i].verification_code,
+                  _id: data[i]._id
+                });
+              } else {
+                this.offerData.push({
+                  created_date: data[i].created_date,
+                  customer_id: data[i].customer_id['_id'],
+                  customer_name: data[i].customer_id['name'],
+                  customer_address: data[i].customer_id['address'],
+                  azlee_offer_amount: data[i].azlee_offer_amount,
+                  delivery_partner_id: data[i].delivery_partner_id['_id'],
+                  delivery_partner_name: data[i].delivery_partner_id['name'],
 
-                orders: data[i].orders,
-                payment_status: data[i].payment_status,
-                payment_type: data[i].payment_type,
-                shop_id: data[i].shop_id['_id'],
-                shop_name: data[i].shop_id['name'],
-                km: data[i].km,
-                total: data[i].total,
-                verification_code: data[i].verification_code,
-                _id: data[i]._id
-              });
+                  is_pickup: data[i].is_pickup,
+                  order_id: data[i].order_id,
+                  order_status: data[i].order_status,
+                  delivery_status: data[i].delivery_status,
+
+                  orders: data[i].orders,
+                  payment_status: data[i].payment_status,
+                  payment_type: data[i].payment_type,
+                  shop_id: '',
+                  shop_name: '',
+                  km: data[i].km,
+                  total: data[i].total,
+                  verification_code: data[i].verification_code,
+                  _id: data[i]._id
+                });
+              }
             } else {
-              this.offerData.push({
-                created_date: data[i].created_date,
-                customer_id: data[i].customer_id['_id'],
-                customer_name: data[i].customer_id['name'],
-                customer_address: data[i].customer_id['address'],
+              if (data[i].shop_id !== null) {
+                this.offerData.push({
+                  created_date: data[i].created_date,
+                  customer_id: data[i].customer_id['_id'],
+                  customer_name: data[i].customer_id['name'],
+                  customer_address: data[i].customer_id['address'],
+                  azlee_offer_amount: data[i].azlee_offer_amount,
+                  delivery_partner_id: '',
+                  delivery_partner_name: '',
 
-                delivery_partner_id: data[i].delivery_partner_id['_id'],
-                delivery_partner_name: data[i].delivery_partner_id['name'],
+                  is_pickup: data[i].is_pickup,
+                  order_id: data[i].order_id,
+                  order_status: data[i].order_status,
+                  delivery_status: data[i].delivery_status,
 
-                is_pickup: data[i].is_pickup,
-                order_id: data[i].order_id,
-                order_status: data[i].order_status,
-                delivery_status: data[i].delivery_status,
+                  orders: data[i].orders,
+                  payment_status: data[i].payment_status,
+                  payment_type: data[i].payment_type,
+                  shop_id: data[i].shop_id['_id'],
+                  shop_name: data[i].shop_id['name'],
+                  km: data[i].km,
+                  total: data[i].total,
+                  verification_code: data[i].verification_code,
+                  _id: data[i]._id
+                });
+              } else {
+                this.offerData.push({
+                  created_date: data[i].created_date,
+                  customer_id: data[i].customer_id['_id'],
+                  customer_name: data[i].customer_id['name'],
+                  customer_address: data[i].customer_id['address'],
+                  azlee_offer_amount: data[i].azlee_offer_amount,
+                  delivery_partner_id: '',
+                  delivery_partner_name: '',
 
-                orders: data[i].orders,
-                payment_status: data[i].payment_status,
-                payment_type: data[i].payment_type,
-                shop_id: '',
-                shop_name: '',
-                km: data[i].km,
-                total: data[i].total,
-                verification_code: data[i].verification_code,
-                _id: data[i]._id
-              });
+                  is_pickup: data[i].is_pickup,
+                  order_id: data[i].order_id,
+                  order_status: data[i].order_status,
+                  delivery_status: data[i].delivery_status,
+
+                  orders: data[i].orders,
+                  payment_status: data[i].payment_status,
+                  payment_type: data[i].payment_type,
+                  shop_id: '',
+                  shop_name: '',
+                  km: data[i].km,
+                  total: data[i].total,
+                  verification_code: data[i].verification_code,
+                  _id: data[i]._id
+                });
+              }
             }
-          } else {
-            if (data[i].shop_id !== null) {
-              this.offerData.push({
-                created_date: data[i].created_date,
-                customer_id: data[i].customer_id['_id'],
-                customer_name: data[i].customer_id['name'],
-                customer_address: data[i].customer_id['address'],
-
-                delivery_partner_id: '',
-                delivery_partner_name: '',
-
-                is_pickup: data[i].is_pickup,
-                order_id: data[i].order_id,
-                order_status: data[i].order_status,
-                delivery_status: data[i].delivery_status,
-
-                orders: data[i].orders,
-                payment_status: data[i].payment_status,
-                payment_type: data[i].payment_type,
-                shop_id: data[i].shop_id['_id'],
-                shop_name: data[i].shop_id['name'],
-                km: data[i].km,
-                total: data[i].total,
-                verification_code: data[i].verification_code,
-                _id: data[i]._id
-              });
-            } else {
-              this.offerData.push({
-                created_date: data[i].created_date,
-                customer_id: data[i].customer_id['_id'],
-                customer_name: data[i].customer_id['name'],
-                customer_address: data[i].customer_id['address'],
-
-                delivery_partner_id: '',
-                delivery_partner_name: '',
-
-                is_pickup: data[i].is_pickup,
-                order_id: data[i].order_id,
-                order_status: data[i].order_status,
-                delivery_status: data[i].delivery_status,
-
-                orders: data[i].orders,
-                payment_status: data[i].payment_status,
-                payment_type: data[i].payment_type,
-                shop_id: '',
-                shop_name: '',
-                km: data[i].km,
-                total: data[i].total,
-                verification_code: data[i].verification_code,
-                _id: data[i]._id
-              });
-            }
-          }
         }
         this.allOfferData = this.offerData;
         this.list = new MatTableDataSource(this.offerData);

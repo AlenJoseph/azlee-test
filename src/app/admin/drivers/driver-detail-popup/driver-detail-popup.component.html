@@ -36,26 +36,18 @@
 
     <ng-container matColumnDef="orderid">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Order ID</mat-header-cell>
-      <mat-cell *matCellDef="let element" style="word-break: break-all; padding: 10px;">
+      <mat-cell *matCellDef="let element">
           {{ element.order_id }}
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="originalAmout">
+
+    <ng-container matColumnDef="totalAmount">
       <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Original Amount</mat-header-cell
+        >Total</mat-header-cell
       >
       <mat-cell *matCellDef="let element">
-        {{ element.orginal_total }}
-      </mat-cell>
-      
-    </ng-container>
-
-    <ng-container matColumnDef="discount">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Discount</mat-header-cell>
-      <mat-cell *matCellDef="let element">
-          {{ element.discount }}
-      </mat-cell>
+        {{ element.total}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="paidAmount">
@@ -63,27 +55,22 @@
         >Paid Amount</mat-header-cell
       >
       <mat-cell *matCellDef="let element">
-        {{ element.total}}</mat-cell>
+       <label *ngIf= "element.azlee_offer_amount == 0"> {{element.total | currency: 'INR' }} </label>
+        <label *ngIf= "element.azlee_offer_amount > 0"> {{element.azlee_offer_amount | currency: 'INR' }} </label>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="deliveryCharge">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Total Delivery Charge</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          {{ element.customer_delivery_charge }}
+      </mat-cell>
     </ng-container>
 
      <ng-container matColumnDef="driverFee">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Driver Fee</mat-header-cell>
       <mat-cell *matCellDef="let element">
           {{ element.delivery_fee }}
-      </mat-cell>
-    </ng-container>
-
-     <ng-container matColumnDef="azleeShopCommission">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Azlee Shop Commission</mat-header-cell>
-      <mat-cell *matCellDef="let element">
-          {{ element.azlee_shop_commision }}
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="azleeDriverCommission">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Azlee Driver Commission</mat-header-cell>
-      <mat-cell *matCellDef="let element">
-          {{ element.azlee_driver_commision }}
       </mat-cell>
     </ng-container>
 
@@ -94,16 +81,15 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="pickup">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Pickup</mat-header-cell>
+    <ng-container matColumnDef="kilometer">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>KM</mat-header-cell>
       <mat-cell *matCellDef="let element">
-         <div *ngIf="element.is_pickup === true" style="text-transform: capitalize">Customer</div>
-                <div *ngIf="element.is_pickup === false" style="text-transform: capitalize">Driver </div>
+         {{ element.km}}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="totalCommission">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Azlee Commission</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Azlee Driver Commission</mat-header-cell>
       <mat-cell *matCellDef="let element">
           {{ element.azlee_total_commission }}
       </mat-cell>

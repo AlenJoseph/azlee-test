@@ -42,13 +42,13 @@ export class ShopDetailPopupComponent implements OnInit {
     'orderid',
     'originalAmout',
     'discount',
+    'totalAmount',
     'paidAmount',
     'shopFee',
     'azleeShopCommission',
     'azleeDriverCommission',
     'type',
-    'pickup',
-    'totalCommission'
+    'pickup'
   ];
   searchKey: string;
   shopData: any = [];
@@ -79,6 +79,8 @@ export class ShopDetailPopupComponent implements OnInit {
           payment_type: data[i].payment_type,
           shop_fee: data[i].shop_fee,
           total: data[i].total,
+          azlee_offer_amount: data[i].azlee_offer_amount,
+          customer_delivery_charge: data[i].customer_delivery_charge,
           _id: data[i]._id,
           azlee_total_commission: (
             data[i].orginal_total - data[i].shop_fee

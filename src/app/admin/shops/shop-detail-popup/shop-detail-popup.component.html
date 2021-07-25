@@ -52,7 +52,7 @@
         >Original Amount</mat-header-cell
       >
       <mat-cell *matCellDef="let element">
-        {{ element.orginal_total }}
+        {{ element.total }}
       </mat-cell>
       
     </ng-container>
@@ -64,12 +64,22 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="totalAmount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Total</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element">
+        {{ element.total}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="paidAmount">
       <mat-header-cell *matHeaderCellDef mat-sort-header
         >Paid Amount</mat-header-cell
       >
       <mat-cell *matCellDef="let element">
-        {{ element.total}}</mat-cell>
+        <label *ngIf= "element.azlee_offer_amount == 0"> {{element.total | currency: 'INR' }} </label>
+        <label *ngIf= "element.azlee_offer_amount > 0"> {{element.azlee_offer_amount | currency: 'INR' }} </label>
+      </mat-cell>
     </ng-container>
 
      <ng-container matColumnDef="shopFee">
@@ -87,9 +97,9 @@
     </ng-container>
 
     <ng-container matColumnDef="azleeDriverCommission">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Azlee Driver Commission</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Total Delivery Charge</mat-header-cell>
       <mat-cell *matCellDef="let element">
-          {{ element.azlee_driver_commision }}
+          {{ element.customer_delivery_charge }}
       </mat-cell>
     </ng-container>
 
@@ -105,13 +115,6 @@
       <mat-cell *matCellDef="let element">
           <div *ngIf="element.is_pickup === true" style="text-transform: capitalize">Customer</div>
             <div *ngIf="element.is_pickup === false" style="text-transform: capitalize">Driver </div>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="totalCommission">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Azlee Commission</mat-header-cell>
-      <mat-cell *matCellDef="let element">
-          {{ element.azlee_total_commission }}
       </mat-cell>
     </ng-container>
 
