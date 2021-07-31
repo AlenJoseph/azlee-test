@@ -274,7 +274,7 @@ export class OrdersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getCategories();
+        this.getCategories(this.selectedDate);
       }
     });
   }
@@ -290,7 +290,7 @@ export class OrdersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getCategories();
+        this.getCategories(this.selectedDate);
       }
     });
   }
@@ -306,7 +306,7 @@ export class OrdersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getCategories();
+        this.getCategories(this.selectedDate);
       }
     });
   }
@@ -323,7 +323,7 @@ export class OrdersComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.getCategories();
+          this.getCategories(this.selectedDate);
         }
       });
     }
@@ -332,7 +332,7 @@ export class OrdersComponent implements OnInit {
   changeDriver(driverId, orderId): void {
     this.offer.changeDriver(orderId, driverId).subscribe(
       (data: any) => {
-        this.getCategories();
+        this.getCategories(this.selectedDate);
         this.openSnackBar('Driver Changed', 'Dismiss');
       },
       error => {
@@ -348,7 +348,7 @@ export class OrdersComponent implements OnInit {
 
     this.offer.changeStatus(status, orderId, shopId).subscribe(
       (data: any) => {
-        this.getCategories();
+        this.getCategories(this.selectedDate);
         this.openSnackBar('Status Changed', 'Dismiss');
       },
       error => {
