@@ -137,17 +137,30 @@
     </ng-container>
 
     <ng-container matColumnDef="updateWallet">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <div class="row">
-            <span class="col-sm-6">
-              <button mat-raised-button class="small-button" color="accent" (click)="updateWallet(element)">
-                Update Wallet
-              </button>
-            </span>
-          </div>        
-        </mat-cell>
-      </ng-container>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div class="row">
+          <span class="col-sm-6">
+            <button mat-raised-button class="small-button" color="accent" (click)="updateWallet(element)">
+              Update Wallet
+            </button>
+          </span>
+        </div>        
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="walletTransaction">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div class="row">
+          <span class="col-sm-6">
+            <button mat-raised-button class="small-button" color="accent" (click)="walletTransaction(element)">
+              Wallet Transaction
+            </button>
+          </span>
+        </div>        
+      </mat-cell>
+    </ng-container>
 
     <!-- Provide footer-row definition -->
     <!-- <mat-footer-row

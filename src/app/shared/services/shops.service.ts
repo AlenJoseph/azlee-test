@@ -105,4 +105,28 @@ export class ShopsService {
   _handleWalletUpdateError(error: Error) {
     return throwError('Failed to update wallet.');
   }
+
+  // Call api to get shop wallet transaction details
+  getShopWalletTransactionDetails(date, id): Observable<boolean> {
+    console.log(date);
+    console.log(id);
+    return this.http
+      .get<any>(
+        environment.baseURL +
+          'admin/shops/transactions?report_type=' +
+          date +
+          '&id=' +
+          id
+      )
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(this._handleGetShopWalletTransactionDetailsError.bind(this))
+      );
+  }
+
+  _handleGetShopWalletTransactionDetailsError(error: Error) {
+    return throwError('Failed to get transaction list.');
+  }
 }

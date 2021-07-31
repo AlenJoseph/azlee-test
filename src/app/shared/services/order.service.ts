@@ -12,18 +12,32 @@ export class OrderService {
   constructor(private http: HttpClient) {}
 
   // Call api to get all Orders
-  getOrders(): Observable<boolean> {
-    return this.http.get<any>(environment.baseURL + 'admin/orders').pipe(
-      map(response => {
-        return response;
-      }),
-      catchError(this._handleGetOffersError.bind(this))
-    );
+  getOrders(selectedDate): Observable<boolean> {
+    if(selectedDate === 'today'){
+      return this.http
+        .get<any>(environment.baseURL + 'admin/orders?report_type=today')
+        .pipe(
+          map(response => {
+            return response;
+          }),
+          catchError(this._handleGetOrdersError.bind(this))
+        );
+    } else {
+      return this.http
+        .get<any>(environment.baseURL + 'admin/orders')
+        .pipe(
+          map(response => {
+            return response;
+          }),
+          catchError(this._handleGetOrdersError.bind(this))
+        );
+    }
   }
 
-  _handleGetOffersError(error: Error) {
+  _handleGetOrdersError(error: Error) {
     return throwError('Failed to get offer list.');
   }
+
 
   // Call api to get customer Details
   getCustomer(id): Observable<boolean> {

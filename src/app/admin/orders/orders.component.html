@@ -17,7 +17,8 @@
             />
           </mat-form-field>
 
-          <mat-form-field 
+          <div>
+            <mat-form-field 
             class="test"
             class="search-form-field"
             appearance="fill"
@@ -34,9 +35,22 @@
 
             </select>
           </mat-form-field>
+          <mat-form-field 
+            class="test"
+            class="search-form-field"
+            appearance="fill"
+            style=" margin-left: 30px;"
+          >
+            <mat-label>Filter</mat-label>
+            <select matNativeControl required (change)="onFilterDateChange($event.target.value)">
+              <option matNativeControl value="today">Today</option>
+              <option matNativeControl value="all">All</option>
+            </select>
+          </mat-form-field>
+          </div>
         </div>
       
-        <mat-table [dataSource]="list" matSort matTableExporter #exporter="matTableExporter" hiddenColumns=[9,11,10]>
+        <mat-table [dataSource]="list" matSort matTableExporter #exporter="matTableExporter" hiddenColumns=[9]>
           <!-- Provide list of columns to be listed -->
           <mat-row *matRowDef="let row; columns: displayedColumns" style="cursor: pointer"></mat-row>
       

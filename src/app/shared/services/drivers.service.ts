@@ -46,7 +46,7 @@ export class DriversService {
   }
 
   // Call api to get driver details
-  getDriverDetails(id): Observable<boolean> {
+  getDriverDetails(id: any): Observable<boolean> {
     return this.http
       .get<any>(
         environment.baseURL +
@@ -88,5 +88,29 @@ export class DriversService {
 
   _handleWalletUpdateError(error: Error) {
     return throwError('Failed to update wallet.');
+  }
+
+  // Call api to get driver wallet transaction details
+  getDriverWalletTransactionDetails(date,id): Observable<boolean> {
+    console.log(date)
+    console.log(id);
+    return this.http
+      .get<any>(
+        environment.baseURL +
+          'admin/delivery-partners/transactions?report_type=' + date + '&id=' +
+          id
+      )
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(
+          this._handleGetDriverWalletTransactionDetailsError.bind(this)
+        )
+      );
+  }
+
+  _handleGetDriverWalletTransactionDetailsError(error: Error) {
+    return throwError('Failed to get transaction list.');
   }
 }

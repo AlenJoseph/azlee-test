@@ -16,6 +16,9 @@ import { ShopWalletPopupComponent } from '../shops/shop-wallet-popup/shop-wallet
 
 import { ShopDetailPopupComponent } from '../shops/shop-detail-popup/shop-detail-popup.component';
 
+import { ShopWalletTransactionPopupComponent } from '../shops/shop-wallet-transaction-popup/shop-wallet-transaction-popup.component';
+
+
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import * as _ from 'lodash';
@@ -51,7 +54,8 @@ export class ShopListComponent implements OnInit {
     'actions',
     'promoteBtn',
     'account',
-    'updateWallet'
+    'updateWallet',
+    'walletTransaction'
   ];
   searchKey: string;
   shopData: any;
@@ -195,7 +199,22 @@ export class ShopListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-        this.getShops();
+      this.getShops();
     });
   }
+
+  walletTransaction(items): void {
+    const dialogRef = this.dialog.open(ShopWalletTransactionPopupComponent, {
+      width: '1200px',
+      maxWidth: '90vw',
+      data: {
+        dataKey: items._id
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getShops();
+    });
+  }
+
 }

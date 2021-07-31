@@ -28,6 +28,8 @@ import { OrderShopPopupComponent } from './orders/order-shop-popup/order-shop-po
 import { OrderDriverPopupComponent } from './orders/order-driver-popup/order-driver-popup.component';
 import { DriverWalletPopupComponent } from './drivers/driver-wallet-popup/driver-wallet-popup.component';
 import { ShopWalletPopupComponent } from './shops/shop-wallet-popup/shop-wallet-popup.component';
+import { DriverWalletTransactionPopupComponent } from './drivers/driver-wallet-transaction-popup/driver-wallet-transaction-popup.component';
+import { ShopWalletTransactionPopupComponent } from './shops/shop-wallet-transaction-popup/shop-wallet-transaction-popup.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { ShopWalletPopupComponent } from './shops/shop-wallet-popup/shop-wallet-
     OrderDriverPopupComponent,
     DriverWalletPopupComponent,
     ShopWalletPopupComponent,
+    DriverWalletTransactionPopupComponent,
+    ShopWalletTransactionPopupComponent,
   ],
   imports: [
     CommonModule,

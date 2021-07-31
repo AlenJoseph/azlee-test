@@ -1,0 +1,53 @@
+.hide {
+    display: none;
+  }
+  
+  .page-path{
+    padding-top: 10px;
+    padding-left: 20px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #0008;
+  }
+  
+  mat-footer-cell {
+    justify-content: center;
+  }
+  
+  .mat-column-cover {
+    max-width: 85px;
+  }
+  
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 0px;
+    margin-top: 15px;
+    height: 30px;
+  }
+  
+  .add-offer{
+    font-size: 12px;
+    line-height: 27px;
+  }
+  
+  mat-table{
+    margin-top: 15px;
+  }
+
+  .mat-expansion-panel-header {
+  padding: 0 !important;
+}
+
+.mat-expansion-panel-body {
+    padding: 0 !important;
+}
+
+.mat-cell{
+    font-size: 14px;
+    word-break: break-word !important;
+    // padding: 0 5px !important;
+}

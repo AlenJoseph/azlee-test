@@ -18,6 +18,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 import { DriverLocationPopupComponent } from '../drivers/driver-location-popup/driver-location-popup.component';
 import { DriverDetailPopupComponent } from '../drivers/driver-detail-popup/driver-detail-popup.component';
 import { DriverWalletPopupComponent } from '../drivers/driver-wallet-popup/driver-wallet-popup.component';
+import { DriverWalletTransactionPopupComponent } from '../drivers/driver-wallet-transaction-popup/driver-wallet-transaction-popup.component';
 
 DriverDetailPopupComponent;
 import * as _ from 'lodash';
@@ -50,7 +51,8 @@ export class DriversComponent implements OnInit {
     'actions',
     'location',
     'account',
-    'updateWallet'
+    'updateWallet',
+    'walletTransaction'
   ];
   searchKey: string;
   shopData: any;
@@ -167,8 +169,23 @@ export class DriversComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-        this.getdrivers();
+      this.getdrivers();
+    });
+  }
+
+  walletTransaction(items): void {
+    const dialogRef = this.dialog.open(DriverWalletTransactionPopupComponent, {
+      width: '1200px',
+      maxWidth: '90vw',
+      data: {
+        dataKey: items._id
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getdrivers();
     });
   }
 }
+
 
