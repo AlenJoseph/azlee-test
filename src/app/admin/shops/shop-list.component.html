@@ -90,13 +90,22 @@
     </ng-container>
     
 
-    <!-- <ng-container matColumnDef="identificationDocs">
-      <mat-header-cell *matHeaderCellDef>Identification Docs</mat-header-cell>
+    <ng-container matColumnDef="open">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
-
-        {{ element.identification_documents }}
+         
+          
+            <button *ngIf="element.is_open"  mat-raised-button class="small-button" color="accent" (click)="openClick(element)">
+              Open
+            </button>
+            <button *ngIf="!element.is_open" mat-raised-button class="small-button" (click)="openClick(element)" style="background-color: #fa5151;color:white">
+              Close
+            </button>
+  
+            
       </mat-cell>
-    </ng-container> -->
+    </ng-container>
+
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">

@@ -9,6 +9,7 @@ import { OffersComponent } from './offers/offers.component';
 import { OrdersComponent } from './orders/orders.component';
 import { RevenueComponent } from './revenue/revenue.component';
 import { FazzaComponent } from './fazza/fazza.component';
+import { PromotedComponent } from './promoted/promoted.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,11 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'promoted',
+        component: PromotedComponent,
+        pathMatch: 'full'
+      },
+      {
         path: '**',
         redirectTo: '/revenue',
         pathMatch: 'full'
@@ -99,6 +105,11 @@ const routes: Routes = [
       {
         path: 'fazza',
         redirectTo: '/fazza',
+        pathMatch: 'full'
+      },
+      {
+        path: 'promoted',
+        redirectTo: '/promoted',
         pathMatch: 'full'
       }
     ]

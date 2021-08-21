@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>New Item</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="newItemForm">
+
+
+
+    <mat-form-field 
+      class="col-sm-12 test search-form-field"
+      appearance="fill"
+    >
+      <mat-label>Store</mat-label>
+      <select matNativeControl formControlName="itemShop" (change)="shopChange($event.target.value)">
+        <option *ngFor="let store of shopList" matNativeControl value={{store._id}} > 
+            {{ store.name }}
+        </option>
+      </select>
+      <mat-error *ngIf="newItemForm.controls.itemShop.invalid">
+          Shop is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field 
+      class="col-sm-12 test search-form-field"
+      appearance="fill"
+    >
+      <mat-label>Products</mat-label>
+      <select matNativeControl formControlName="itemProduct">
+        <option *ngFor="let product of productList" matNativeControl value={{product._id}} > 
+            {{ product.name }}
+        </option>
+      </select>
+       <mat-error *ngIf="newItemForm.controls.itemProduct.invalid">
+          Product is required
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<div mat-dialog-actions align="end">
+  <button mat-stroked-button (click)="onNoClick()">Cancel</button>
+  <button
+    mat-flat-button
+    [disabled]="newItemForm.invalid || isSubmitting"
+    [ngClass]="{ 'spinner-padding': isSubmitting }"
+    (click)="onSubmit()"
+    color="accent"
+    cdkFocusInitial
+  >
+    <span *ngIf="!isSubmitting">Create</span>
+    <mat-spinner [diameter]="20" *ngIf="isSubmitting"></mat-spinner>
+  </button>
+</div>

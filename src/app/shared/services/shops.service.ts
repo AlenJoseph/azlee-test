@@ -25,6 +25,25 @@ export class ShopsService {
     return throwError('Failed to get category list.');
   }
 
+  // Call api to open/close shop
+  openCloseShop(shopId: any, status: any): Observable<boolean> {
+    return this.http
+      .put<any>(environment.baseURL + 'admin/shops/open', {
+        id: shopId,
+        status: status
+      })
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(this._handleActivateShopOpenError.bind(this))
+      );
+  }
+
+  _handleActivateShopOpenError(error: Error) {
+    return throwError('Failed to promote shop.');
+  }
+
   // Call api to promote shop
   verifyShop(shopId: any, status: any): Observable<boolean> {
     return this.http

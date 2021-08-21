@@ -51,6 +51,7 @@ export class ShopListComponent implements OnInit {
     'wallet',
     'verify',
     'promote',
+    'open',
     'actions',
     'promoteBtn',
     'account',
@@ -100,6 +101,44 @@ export class ShopListComponent implements OnInit {
     });
 
     snackBarRef.afterDismissed().subscribe(() => {});
+  }
+
+  openClick(element: any) {
+    element = {
+      ...element,
+      confirmationMessage: `Are you sure want to open/close ${element.name}?`
+    };
+    this.openClickConfirmDialog(element);
+  }
+
+  openClickConfirmDialog(data): void {
+    console.log(data.is_open)
+
+     let open = false;
+     if (data.is_open === true) {
+       open = false;
+     } else {
+       open = true;
+     }
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+      data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.shops.openCloseShop(data._id, open).subscribe(
+          (data: any) => {
+            this.openSnackBar('Shop Opened/Closed', 'Dismiss');
+            this.getShops();
+          },
+          error => {
+            this.openSnackBar(error, 'Dismiss');
+          }
+        );
+      }
+    });
   }
 
   verifyShop(element: any) {
@@ -216,5 +255,4 @@ export class ShopListComponent implements OnInit {
       this.getShops();
     });
   }
-
 }
