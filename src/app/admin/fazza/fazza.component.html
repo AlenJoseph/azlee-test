@@ -34,10 +34,17 @@
     </ng-container> -->
 
 
-    <ng-container matColumnDef="id">
+    <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element" style="word-break: break-word; padding: 10px;">
+          {{ element.customer }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="contact">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Contact</mat-header-cell>
       <mat-cell *matCellDef="let element" style="word-break: break-all; padding: 10px;">
-          {{ element._id }}
+          {{ element.customer_no }}
       </mat-cell>
     </ng-container>
 
@@ -48,12 +55,12 @@
       <mat-cell *matCellDef="let element">{{ element.description }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="customer">
+    <!-- <ng-container matColumnDef="customer">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
       <mat-cell *matCellDef="let element">
           {{ element.customer_id }}
       </mat-cell>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="from">
       <mat-header-cell *matHeaderCellDef mat-sort-header>From</mat-header-cell>
@@ -69,12 +76,12 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="driver">
+    <!-- <ng-container matColumnDef="driver">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Driver</mat-header-cell>
       <mat-cell *matCellDef="let element">
           {{ element.fazza_driver }}
       </mat-cell>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="fee">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Fee</mat-header-cell>
@@ -83,12 +90,12 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="paymentstatus">
+    <!-- <ng-container matColumnDef="paymentstatus">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Payment Status</mat-header-cell>
       <mat-cell *matCellDef="let element">
           {{ element.payment_status }}
       </mat-cell>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="fazzastatus">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Fazza Status</mat-header-cell>
@@ -104,14 +111,27 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="creationDate">
+    <ng-container matColumnDef="bids">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Bids</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div class="row">
+          <span class="col-sm-6">
+            <button mat-raised-button class="small-button" color="accent" (click)="viewBids(element)">
+              View Bids
+            </button>
+          </span>
+        </div>        
+      </mat-cell>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="creationDate">
       <mat-header-cell *matHeaderCellDef mat-sort-header
         >Creation Date</mat-header-cell
       >
       <mat-cell *matCellDef="let element">{{
         element.created_date | date
       }}</mat-cell>
-    </ng-container>
+    </ng-container> -->
 
 
     <!-- Provide footer-row definition -->

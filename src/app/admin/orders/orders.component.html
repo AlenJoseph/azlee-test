@@ -105,6 +105,12 @@
                 {{ element.customer_address }}
             </mat-cell>
           </ng-container>
+          <ng-container matColumnDef="note">
+             <mat-header-cell *matHeaderCellDef mat-sort-header style="padding:0px 12px 0px 6px;">Notes</mat-header-cell>
+            <mat-cell *matCellDef="let element" style="padding:6px 12px 0px 6px;word-break: break-word;">
+                {{ element.notes }}
+            </mat-cell>
+          </ng-container>
           <ng-container matColumnDef="driver">
              <mat-header-cell *matHeaderCellDef mat-sort-header style="padding:0px 12px 0px 6px">Driver</mat-header-cell>
                 <mat-cell *matCellDef="let element" (click)="openDriverDetailDialog(element)" style="padding:6px 12px 0px 6px;word-break: break-word;">

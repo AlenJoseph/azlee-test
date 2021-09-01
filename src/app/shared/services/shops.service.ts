@@ -25,6 +25,20 @@ export class ShopsService {
     return throwError('Failed to get category list.');
   }
 
+  // Call api to get all fazza partners
+  getfazzaPartners(): Observable<boolean> {
+    return this.http.get<any>(environment.baseURL + 'admin/fazza/partner').pipe(
+      map(response => {
+        return response;
+      }),
+      catchError(this._handleGetFazzaPartnersError.bind(this))
+    );
+  }
+
+  _handleGetFazzaPartnersError(error: Error) {
+    return throwError('Failed to get partner list.');
+  }
+
   // Call api to open/close shop
   openCloseShop(shopId: any, status: any): Observable<boolean> {
     return this.http

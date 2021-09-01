@@ -32,6 +32,9 @@ import { DriverWalletTransactionPopupComponent } from './drivers/driver-wallet-t
 import { ShopWalletTransactionPopupComponent } from './shops/shop-wallet-transaction-popup/shop-wallet-transaction-popup.component';
 import { PromotedComponent } from './promoted/promoted.component';
 import { AddItemComponent } from './promoted/add-item/add-item.component';
+import { BidsPopupComponent } from './fazza/bids-popup/bids-popup.component';
+import { PharmacyComponent } from './pharmacy/pharmacy.component';
+import { FazzaPartnerComponent } from './fazza-partner/fazza-partner.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,9 @@ import { AddItemComponent } from './promoted/add-item/add-item.component';
     ShopWalletTransactionPopupComponent,
     PromotedComponent,
     AddItemComponent,
+    BidsPopupComponent,
+    PharmacyComponent,
+    FazzaPartnerComponent,
   ],
   imports: [
     CommonModule,

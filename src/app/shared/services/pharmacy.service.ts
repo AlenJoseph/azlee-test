@@ -8,22 +8,22 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class FazzaService {
+export class PharmacyService {
   constructor(private http: HttpClient) {}
 
   // Call api to get all categories
-  getFazza(): Observable<boolean> {
-    return this.http.get<any>(environment.baseURL + 'admin/fazza?status=all_bids').pipe(
-      map(response => {
-        return response;
-      }),
-      catchError(this._handleGetCategoriesError.bind(this))
-    );
+  getPharmacy(): Observable<boolean> {
+    return this.http
+      .get<any>(environment.baseURL + 'admin/pharmacy')
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(this._handleGetPharmacyError.bind(this))
+      );
   }
 
-  _handleGetCategoriesError(error: Error) {
-    return throwError('Failed to get fazza list.');
+  _handleGetPharmacyError(error: Error) {
+    return throwError('Failed to get pharmacy list.');
   }
-
-
 }

@@ -53,6 +53,7 @@ export class OrdersComponent implements OnInit {
     'paymentType',
     'orderStatus',
     'address',
+    'note',
     'driver',
     'deliveryStatus',
     'pickupStatus',
@@ -102,7 +103,7 @@ export class OrdersComponent implements OnInit {
                 azlee_offer_amount: data[i].azlee_offer_amount,
                 delivery_partner_id: data[i].delivery_partner_id['_id'],
                 delivery_partner_name: data[i].delivery_partner_id['name'],
-
+                notes: data[i].notes,
                 is_pickup: data[i].is_pickup,
                 order_id: data[i].order_id,
                 order_status: data[i].order_status,
@@ -127,7 +128,7 @@ export class OrdersComponent implements OnInit {
                 azlee_offer_amount: data[i].azlee_offer_amount,
                 delivery_partner_id: data[i].delivery_partner_id['_id'],
                 delivery_partner_name: data[i].delivery_partner_id['name'],
-
+                notes: data[i].notes,
                 is_pickup: data[i].is_pickup,
                 order_id: data[i].order_id,
                 order_status: data[i].order_status,
@@ -154,7 +155,7 @@ export class OrdersComponent implements OnInit {
                 azlee_offer_amount: data[i].azlee_offer_amount,
                 delivery_partner_id: '',
                 delivery_partner_name: '',
-
+                notes: data[i].notes,
                 is_pickup: data[i].is_pickup,
                 order_id: data[i].order_id,
                 order_status: data[i].order_status,
@@ -179,7 +180,7 @@ export class OrdersComponent implements OnInit {
                 azlee_offer_amount: data[i].azlee_offer_amount,
                 delivery_partner_id: '',
                 delivery_partner_name: '',
-
+                notes: data[i].notes,
                 is_pickup: data[i].is_pickup,
                 order_id: data[i].order_id,
                 order_status: data[i].order_status,

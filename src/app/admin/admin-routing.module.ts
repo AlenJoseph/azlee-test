@@ -10,6 +10,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { RevenueComponent } from './revenue/revenue.component';
 import { FazzaComponent } from './fazza/fazza.component';
 import { PromotedComponent } from './promoted/promoted.component';
+import { PharmacyComponent } from './pharmacy/pharmacy.component';
+import { FazzaPartnerComponent } from './fazza-partner/fazza-partner.component';
 
 const routes: Routes = [
   {
@@ -62,6 +64,16 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'pharmacy',
+        component: PharmacyComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'partner',
+        component: FazzaPartnerComponent,
+        pathMatch: 'full'
+      },
+      {
         path: '**',
         redirectTo: '/revenue',
         pathMatch: 'full'
@@ -110,6 +122,16 @@ const routes: Routes = [
       {
         path: 'promoted',
         redirectTo: '/promoted',
+        pathMatch: 'full'
+      },
+      {
+        path: 'pharmacy',
+        redirectTo: '/pharmacy',
+        pathMatch: 'full'
+      },
+      {
+        path: 'partner',
+        redirectTo: '/partner',
         pathMatch: 'full'
       }
     ]

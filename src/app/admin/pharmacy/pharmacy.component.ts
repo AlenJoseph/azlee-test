@@ -11,22 +11,22 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA
 } from '@angular/material/dialog';
-import { BidsPopupComponent } from '../fazza/bids-popup/bids-popup.component'
+import { BidsPopupComponent } from '../fazza/bids-popup/bids-popup.component';
 
-import { FazzaService } from '../../shared/services/fazza.service';
+import { PharmacyService } from '../../shared/services/pharmacy.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-fazza',
-  templateUrl: './fazza.component.html',
-  styleUrls: ['./fazza.component.scss']
+  selector: 'app-pharmacy',
+  templateUrl: './pharmacy.component.html',
+  styleUrls: ['./pharmacy.component.scss']
 })
-export class FazzaComponent implements OnInit {
+export class PharmacyComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
-    private category: FazzaService,
+    private pharmacy: PharmacyService,
     public dialog: MatDialog
   ) {}
 
@@ -34,21 +34,19 @@ export class FazzaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   displayedColumns: string[] = [
-    'name',
-    'contact',
-    'description',
-    // 'customer',
-    'from',
-    'to',
-    // 'driver',
-    'fee',
-    // 'paymentstatus',
-    'fazzastatus',
-    'vehlicletype',
-    'bids'
+    'created_date',
+    'customerName',
+    'customerContact',
+    'customerStatus',
+    'notes',
+    'orderStatus',
+    'updated_date',
+    'shopName',
+    'shopContact',
+    'image'
   ];
   searchKey: string;
-  fazzaData: any = [];
+  pharmacyData: any = [];
 
   list: MatTableDataSource<any>;
 
@@ -57,27 +55,31 @@ export class FazzaComponent implements OnInit {
   }
 
   getFazza() {
-    this.category.getFazza().subscribe(
+    this.pharmacy.getPharmacy().subscribe(
       (data: any) => {
         // filer out all blocked categories
         data = data.filter(category => {
           return !category.is_blocked;
         });
+        console.log(data);
         for (let i = 0; i < data.length; i++) {
-          this.fazzaData.push({
-            bids: data[i].bids,
+          this.pharmacyData.push({
+            created_date: data[i].created_date,
             customer: data[i].customer_id['name'],
-            description: data[i].description,
             customer_no: data[i].customer_id['phone_number'],
-            fazza_fee: data[i].fazza_fee,
-            fazza_status: data[i].fazza_status,
-            from_address: data[i].from_address,
-            to_address: data[i].to_address,
-            vehicle_type: data[i].vehicle_type,
+            customer_status: data[i].customer_status,
+            notes: data[i].notes,
+            order_status: data[i].order_status,
+            orders_image: data[i].orders_image,
+            updated_date: data[i].updated_date,
+            shop: data[i].shop_id['name'],
+            shop_no: data[i].shop_id['phone_number'],
             _id: data[i]._id
           });
         }
-        this.list = new MatTableDataSource(this.fazzaData);
+        console.log(this.pharmacyData);
+
+        this.list = new MatTableDataSource(this.pharmacyData);
         this.list.sort = this.sort;
         this.list.paginator = this.paginator;
       },
@@ -109,17 +111,9 @@ export class FazzaComponent implements OnInit {
     snackBarRef.afterDismissed().subscribe(() => {});
   }
 
-  viewBids(items): void {
-    const dialogRef = this.dialog.open(BidsPopupComponent, {
-      width: '1200px',
-      maxWidth: '90vw',
-      data: {
-        dataKey: items.bids
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.getFazza();
-    });
+  viewImages(item): void {
+    console.log(item);
+    window.open(item,"_blank")
   }
 }
+
