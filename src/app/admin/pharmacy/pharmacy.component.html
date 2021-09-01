@@ -16,6 +16,23 @@
         (keyup)="applyFilter()"
       />
     </mat-form-field>
+
+    <mat-form-field 
+      class="test"
+      class="search-form-field"
+      appearance="fill"
+    >
+      <mat-label>Status</mat-label>
+      <select matNativeControl required (change)="onFilterChange($event.target.value)">
+        <option matNativeControl value="all">All</option>
+        <option matNativeControl value="delivered">Delivered</option>
+        <option matNativeControl value="pending">Pending</option>
+        <option matNativeControl value="completed">Completed</option>
+        <option matNativeControl value="rejected">Rejected</option>
+        <option matNativeControl value="shop-accepted">Shop Accepted</option>
+
+      </select>
+    </mat-form-field>
   </div>
 
   <mat-table [dataSource]="list" matSort matTableExporter #exporter="matTableExporter">
