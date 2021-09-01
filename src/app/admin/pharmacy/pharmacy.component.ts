@@ -11,7 +11,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA
 } from '@angular/material/dialog';
-import { BidsPopupComponent } from '../fazza/bids-popup/bids-popup.component';
+import { PharmacyImagePopupComponent } from '../pharmacy/pharmacy-image-popup/pharmacy-image-popup.component';
 
 import { PharmacyService } from '../../shared/services/pharmacy.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -62,7 +62,6 @@ export class PharmacyComponent implements OnInit {
           return !category.is_blocked;
         });
         for (let i = 0; i < data.length; i++) {
-          console.log(data[i]);
           if (data[i].shop_id !== null) {
             this.pharmacyData.push({
               created_date: data[i].created_date,
@@ -129,8 +128,17 @@ export class PharmacyComponent implements OnInit {
   }
 
   viewImages(item): void {
-    console.log(item);
-    window.open(item, '_blank');
+    const dialogRef = this.dialog.open(PharmacyImagePopupComponent, {
+      width: '600px',
+      maxWidth: '90vw',
+      data: {
+        dataKey: item
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getFazza();
+    });
   }
 }
 

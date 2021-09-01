@@ -35,6 +35,7 @@ import { AddItemComponent } from './promoted/add-item/add-item.component';
 import { BidsPopupComponent } from './fazza/bids-popup/bids-popup.component';
 import { PharmacyComponent } from './pharmacy/pharmacy.component';
 import { FazzaPartnerComponent } from './fazza-partner/fazza-partner.component';
+import { PharmacyImagePopupComponent } from './pharmacy/pharmacy-image-popup/pharmacy-image-popup.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { FazzaPartnerComponent } from './fazza-partner/fazza-partner.component';
     BidsPopupComponent,
     PharmacyComponent,
     FazzaPartnerComponent,
+    PharmacyImagePopupComponent,
   ],
   imports: [
     CommonModule,
